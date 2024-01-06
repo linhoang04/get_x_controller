@@ -1,19 +1,26 @@
-import 'package:get/get.dart';
-import 'package:todo_app/model/task_model.dart';
+import 'dart:ui';
 
-class AddController extends GetxController {
-  late List<TaskModel> task = [];
-  bool isLoading = true.obs();
+import 'package:get/get_state_manager/get_state_manager.dart';
+
+class AddController extends GetxController{
+  late String dead;
   late String title;
-  void onTitleChanged(String value) {
+  late String deadDay;
+  late String place;
+  late Color color;
+  void onTitalChange( String value){
     title = value;
   }
-  void addTask(TaskModel model) {
-    task.add(model);
+  void onDeadlineChange(String deadline){
+    dead = deadline;
   }
-
-  void _updateTask(TaskModel newTask) {
-    final index = task.indexWhere((element) => element.id == newTask.id);
-    task[index] = newTask;
+  void onDeadlineDayChange(String deadlineDay){
+    deadDay = deadlineDay;
+  }
+  void onPlaceChange(String plce){
+    place = plce;
+  }
+  void onColorChange(Color clo){
+    color = clo;
   }
 }

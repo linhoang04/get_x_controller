@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:todo_app/presentation/manager_screen.dart';
+import 'package:task_todo/presentation/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +11,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ManagerPage(),
+      home: const MyHomePage(),
     );
   }
 }
+
