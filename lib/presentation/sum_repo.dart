@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/instance_manager.dart';
 import 'package:task_todo/controller/add_controller.dart';
 
@@ -11,9 +10,8 @@ class ColorNew extends StatelessWidget {
   Widget build(BuildContext context) {
     AddController addController = Get.put(AddController());
     return InkWell(
-      onTap: (){
+      onTap: () {
         addController.onColorChange(this.color);
-        print(this.color);
       },
       child: Container(
         width: 20,

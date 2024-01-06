@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+
 class Todo {
   String id;
   // DateTime dateCreated;
@@ -20,7 +21,7 @@ class Todo {
     // DateTime? dateCreated,
     // DateTime? dateCompleated,
     String? id,
-  }): id = id ?? Uuid().v4();
+  }) : id = id ?? const Uuid().v4();
   // String get createDateString => '${dateCreated.day}/${dateCreated.month}/${dateCreated.year}';
   String toString() {
     return 'id: $id, title: $title';

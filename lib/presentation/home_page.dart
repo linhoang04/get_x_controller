@@ -26,12 +26,17 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder:(context) => ProfilePage(),));
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ProfilePage(),
+                    ));
                   },
                   icon: const Icon(Icons.event)),
               const Align(
                 alignment: Alignment.center,
-                child: Text('Task Manager',style: TextStyle(fontSize: 23),),
+                child: Text(
+                  'Task Manager',
+                  style: TextStyle(fontSize: 23),
+                ),
               ),
               IconButton(
                   onPressed: () {/*Chuông thông báo*/},
@@ -62,10 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
                 IconButton(
-                  iconSize: 35,
+                    iconSize: 35,
                     onPressed: () {/*tìm kiến lịch*/},
                     icon: const Icon(Icons.search_outlined)),
-                    
               ],
             ),
           ),
@@ -93,20 +97,20 @@ class _MyHomePageState extends State<MyHomePage> {
               // const AddEvent()
             ],
           ),
-          ListTask(),
+          const ListTask(),
           Align(
-              alignment: Alignment.bottomCenter,
-              child: FloatingActionButton(
-                onPressed: () {
-                  Navigator.of(context).push<Todo>(MaterialPageRoute<Todo>(builder:(context) {
+            alignment: Alignment.bottomCenter,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push<Todo>(MaterialPageRoute<Todo>(
+                  builder: (context) {
                     return const AddPage();
                   },
-                  )).then((value) => homeController.addTask(value!));
-                      },
-                child: Text('Add'),
-                  ),
-              ),
-          
+                )).then((value) => homeController.addTask(value!));
+              },
+              child: const Text('Add'),
+            ),
+          ),
         ],
       )),
     );

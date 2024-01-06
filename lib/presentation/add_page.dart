@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:task_todo/controller/add_controller.dart';
 import 'package:task_todo/presentation/sum_repo.dart';
 import 'package:task_todo/repo/home_repo.dart';
 
 class AddPage extends StatefulWidget {
-  const AddPage({super.key});
-
+  final Todo? task;
+  const AddPage({super.key, this.task});
   @override
   State<AddPage> createState() => _AddPageState();
 }
@@ -15,10 +15,14 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
+    // late String _title;
+    final isEdit = widget.task != null;
     AddController addController = Get.put(AddController());
+    var _title = widget.task != null ? widget.task!.title : '';
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add Task'),
+          title: Text(isEdit ? 'Edit Task' : 'Add Task'),
+          automaticallyImplyLeading: false,
         ),
         body: SafeArea(
           child: Padding(
@@ -33,8 +37,9 @@ class _AddPageState extends State<AddPage> {
                   height: 5,
                 ),
                 TextFormField(
+                  initialValue: _title,
                   onChanged: (value) {
-                    if (value != null || value.isNotEmpty) {
+                    if (value.isNotEmpty) {
                       addController.onTitalChange(value);
                     }
                   },
@@ -125,7 +130,7 @@ class _AddPageState extends State<AddPage> {
                     Expanded(
                       child: TextFormField(
                         onChanged: (value) {
-                          if (value != null || value.isNotEmpty) {
+                          if (value.isNotEmpty) {
                             addController.onDeadlineDayChange(value);
                           }
                         },
@@ -157,7 +162,7 @@ class _AddPageState extends State<AddPage> {
                     Expanded(
                       child: TextFormField(
                         onChanged: (value) {
-                          if (value != null || value.isNotEmpty) {
+                          if (value.isNotEmpty) {
                             addController.onPlaceChange(value);
                           }
                         },
@@ -174,14 +179,14 @@ class _AddPageState extends State<AddPage> {
                         ),
                       ),
                     ),
-                    Icon(Icons.location_city),
+                    const Icon(Icons.location_city),
                   ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
-                    onPressed: onAddTask, child: const Text('Save Task'))
+                    onPressed: onAddTask, child: const Text('Save Task')),
               ],
             ),
           ),
@@ -190,12 +195,29 @@ class _AddPageState extends State<AddPage> {
 
   void onAddTask() {
     AddController addController = Get.find<AddController>();
-    final newTask = Todo(
-        title: addController.title,
-        deadline: addController.dead,
-        deadlineDay: addController.deadDay,
-        place: addController.place,
-        color: addController.color);
-    Navigator.of(context).pop(newTask);
+    if (addController.title.isEmpty ||
+        addController.dead.isEmpty ||
+        addController.dead.isEmpty ||
+        addController.deadDay.isEmpty ||
+        addController.place.isEmpty) {
+      return;
+    } else if (widget.task != null) {
+      var newTask = widget.task!;
+      newTask.title = addController.title;
+      newTask.deadline = addController.dead;
+      newTask.deadlineDay = addController.deadDay;
+      newTask.place = addController.place;
+      newTask.color = addController.color;
+      Navigator.of(context).pop(newTask);
+      return;
+    } else {
+      final newTask = Todo(
+          title: addController.title,
+          deadline: addController.dead,
+          deadlineDay: addController.deadDay,
+          place: addController.place,
+          color: addController.color);
+      Navigator.of(context).pop(newTask);
+    }
   }
 }
