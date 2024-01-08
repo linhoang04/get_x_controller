@@ -3,7 +3,7 @@ import 'package:get/instance_manager.dart';
 import 'package:task_todo/controller/add_controller.dart';
 
 class ColorNew extends StatelessWidget {
-  final color;
+  final Color color;
   const ColorNew({super.key, required this.color});
 
   @override
@@ -11,7 +11,7 @@ class ColorNew extends StatelessWidget {
     AddController addController = Get.put(AddController());
     return InkWell(
       onTap: () {
-        addController.onColorChange(this.color);
+        addController.onColorChange(color);
       },
       child: Container(
         width: 20,

@@ -5,8 +5,6 @@ import 'package:uuid/uuid.dart';
 
 class Todo {
   String id;
-  // DateTime dateCreated;
-  // DateTime? dateCompleated;
   String? deadline;
   String? deadlineDay;
   String? place;
@@ -18,11 +16,9 @@ class Todo {
     required this.deadlineDay,
     required this.place,
     required this.color,
-    // DateTime? dateCreated,
-    // DateTime? dateCompleated,
     String? id,
   }) : id = id ?? const Uuid().v4();
-  // String get createDateString => '${dateCreated.day}/${dateCreated.month}/${dateCreated.year}';
+  @override
   String toString() {
     return 'id: $id, title: $title';
   }

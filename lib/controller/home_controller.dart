@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:task_todo/repo/home_repo.dart';
+import 'package:task_todo/model/home_model.dart';
 
 class HomeController extends GetxController {
+  RxInt count = 0.obs;
   final RxList<Todo> taskList = <Todo>[
     Todo(
         title: 'linhdeptrai',
@@ -13,6 +14,7 @@ class HomeController extends GetxController {
   ].obs;
   void addTask(Todo newTask) {
     taskList.add(newTask);
+    count++;
   }
 
   void removeTask(String id) {

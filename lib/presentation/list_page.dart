@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:get/instance_manager.dart';
 import 'package:task_todo/controller/home_controller.dart';
@@ -18,13 +17,13 @@ class ListTask extends StatelessWidget {
           return ListView.builder(
             itemCount: homeController.taskList.length,
             itemBuilder: (context, index) {
-              final _tasks = controller.taskList[index];
+              final hisTask = controller.taskList[index];
               return ListTile(
                 title: Container(
                   width: MediaQuery.of(context).size.width * 0.99,
                   height: 150,
                   decoration: BoxDecoration(
-                      color: _tasks.color,
+                      color: hisTask.color,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
                         color: Colors.black,
@@ -44,7 +43,7 @@ class ListTask extends StatelessWidget {
                                     side: const BorderSide(
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
-                                  '${_tasks.place}',
+                                  '${hisTask.place}',
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 12,
@@ -79,7 +78,7 @@ class ListTask extends StatelessWidget {
                                         .push(
                                           MaterialPageRoute(
                                             builder: (context) => AddPage(
-                                              task: _tasks,
+                                              task: hisTask,
                                             ),
                                           ),
                                         )
@@ -94,7 +93,7 @@ class ListTask extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              _tasks.title,
+                              hisTask.title,
                               style: const TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                             ),
@@ -114,7 +113,7 @@ class ListTask extends StatelessWidget {
                                 ),
                               )),
                               TextSpan(
-                                  text: _tasks.deadline,
+                                  text: hisTask.deadline,
                                   style: const TextStyle(fontSize: 12)),
                             ])),
                           ),
@@ -135,7 +134,7 @@ class ListTask extends StatelessWidget {
                                     ),
                                   )),
                                   TextSpan(
-                                      text: '${_tasks.deadlineDay}',
+                                      text: '${hisTask.deadlineDay}',
                                       style: const TextStyle(fontSize: 12)),
                                 ])),
                               ),
@@ -144,7 +143,7 @@ class ListTask extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 6),
                               child: GestureDetector(
                                 onTap: () {
-                                  homeController.removeTask(_tasks.id);
+                                  homeController.removeTask(hisTask.id);
                                 },
                                 child: Container(
                                   width: 20,
