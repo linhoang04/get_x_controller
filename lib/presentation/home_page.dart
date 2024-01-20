@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_todo/controller/home_controller.dart';
 import 'package:task_todo/presentation/add_page.dart';
 import 'package:task_todo/presentation/list_page.dart';
@@ -14,6 +17,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  HomeController homeController = Get.put(HomeController());
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      isLoading = true;
+    });
+    SharedPreferences.getInstance().then((value) {
+      homeController.sharedPreferences = value;
+      _getLocalData();
+      isLoading = false;
+    });
+  }
+
+  void _getLocalData() {
+    final stringData = homeController.sharedPreferences.getString('data');
+    final json = jsonDecode(stringData!);
+    setState(() {
+      json
+          .map((element) => Todo.fromJson(element as Map<String, dynamic>))
+          .toList();
+    });
+  }
+
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());

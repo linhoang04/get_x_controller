@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -22,4 +21,20 @@ class Todo {
   String toString() {
     return 'id: $id, title: $title';
   }
+
+  factory Todo.fromJson(Map<String, dynamic> json) => Todo(
+      title: json['title'],
+      deadline: json['deadline'],
+      deadlineDay: json['deadlineDay'],
+      place: json['place'],
+      color: json['color'],
+      id: json['id']);
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'deadline': deadline,
+        'deadlineDay': deadlineDay,
+        'color': color,
+        'place': place,
+      };
 }
