@@ -27,14 +27,27 @@ class Todo {
       deadline: json['deadline'],
       deadlineDay: json['deadlineDay'],
       place: json['place'],
-      color: json['color'],
+      color: _colorFromJson(json['color']),
       id: json['id']);
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'deadline': deadline,
         'deadlineDay': deadlineDay,
-        'color': color,
+        'color': _colorToJson(color),
         'place': place,
       };
+  static String _colorToJson(Color? color) {
+    if (color == null) {
+      return '';
+    }
+    return color.value.toRadixString(16).padLeft(8, '0');
+  }
+
+  static Color? _colorFromJson(String? colorString) {
+    if (colorString == null || colorString.isEmpty) {
+      return null;
+    }
+    return Color(int.parse('0x${colorString.padLeft(8, '0')}'));
+  }
 }

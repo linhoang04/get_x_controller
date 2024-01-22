@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:task_todo/controller/add_controller.dart';
-import 'package:task_todo/presentation/sum_repo.dart';
 import 'package:task_todo/model/home_model.dart';
 
 class AddPage extends StatefulWidget {
@@ -18,6 +18,8 @@ class _AddPageState extends State<AddPage> {
     final isEdit = widget.task != null;
     AddController addController = Get.put(AddController());
     var hisTitle = widget.task != null ? widget.task!.title : '';
+    Color currentColor = const Color(0xff443a49);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(isEdit ? 'Edit Task' : 'Add Task'),
@@ -65,40 +67,34 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Row(
-                    children: [
-                      ColorNew(
-                        color: Color.fromARGB(255, 117, 160, 195),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ColorNew(
-                        color: Colors.yellow,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ColorNew(
-                        color: Colors.red,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ColorNew(
-                        color: Color.fromARGB(255, 40, 228, 134),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ColorNew(
-                        color: Color.fromARGB(255, 234, 230, 233),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),
+                  ElevatedButton(
+                      onPressed: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('chon mau'),
+                                content: SingleChildScrollView(
+                                  child: ColorPicker(
+                                    pickerColor: currentColor,
+                                    onColorChanged: (Color color) {
+                                      currentColor = color;
+                                    },
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        addController
+                                            .onColorChange(currentColor);
+                                        Navigator.of(context).pop(currentColor);
+                                      },
+                                      child: const Text('chon'))
+                                ],
+                              );
+                            });
+                      },
+                      child: const Text('chonj mauf')),
                   const SizedBox(
                     height: 10,
                   ),

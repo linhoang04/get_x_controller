@@ -10,6 +10,7 @@ class ListTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
+    // SharedPreferencesBox sharedPreferencesBox = Get.put(SharedPreferencesBox());
     return Expanded(
       child: GetX<HomeController>(
         init: HomeController(),
@@ -38,7 +39,10 @@ class ListTask extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextButton(
-                                onPressed: () {/*ko có*/},
+                                onPressed: () {
+                                  // sharedPreferencesBox
+                                  //     .savePlaceToPreferences('${hisTask.place}');
+                                },
                                 style: TextButton.styleFrom(
                                     side: const BorderSide(
                                         color: Colors.black, width: 0.5)),
@@ -106,7 +110,7 @@ class ListTask extends StatelessWidget {
                                 text: TextSpan(children: [
                               const WidgetSpan(
                                   child: Padding(
-                                padding: EdgeInsets.only(right: 2),
+                                padding: EdgeInsets.only(right: 2, top: 10),
                                 child: Icon(
                                   Icons.calendar_today,
                                   size: 15,
@@ -114,7 +118,10 @@ class ListTask extends StatelessWidget {
                               )),
                               TextSpan(
                                   text: hisTask.deadline,
-                                  style: const TextStyle(fontSize: 12)),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black,
+                                  )),
                             ])),
                           ),
                         ),
@@ -135,7 +142,8 @@ class ListTask extends StatelessWidget {
                                   )),
                                   TextSpan(
                                       text: '${hisTask.deadlineDay}',
-                                      style: const TextStyle(fontSize: 12)),
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.black)),
                                 ])),
                               ),
                             ),
